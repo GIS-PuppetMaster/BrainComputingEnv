@@ -6,6 +6,7 @@ using UnityEngine;
 public class MessageManager
 {
     //当前环境中存在的消息集合
+    //TODO:保存消息的发送位置
     private readonly ISet<JObject> _messageSet=new HashSet<JObject>();
     /// <summary>
     /// 获取环境中某个agent自己发出的消息

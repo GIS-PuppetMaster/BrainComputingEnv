@@ -23,7 +23,7 @@ public class IOConcrete : MonoBehaviour,IOInterface
     /// <summary>
     /// 环境信息输出路径
     /// </summary>
-    public static string Path = "";
+    public static string EnvMessagePath = "";
 
 
     //上一次读取命令时文件的时间戳
@@ -54,6 +54,7 @@ public class IOConcrete : MonoBehaviour,IOInterface
 
     /// <summary>
     /// 初始化Json读取
+    /// 会读取文件信息和内容，并清空文件
     /// </summary>
     private void JsonReaderInit()
     {
@@ -62,8 +63,8 @@ public class IOConcrete : MonoBehaviour,IOInterface
         _reader = new JsonTextReader(_file);
         _jObject = (JObject)JToken.ReadFrom(_reader);
         _file.Close();
-        //TODO:清空文件
-        
+        //清空文件
+        File.WriteAllText(AgentControlPath,"");
         //记录清空文件后的时间戳
         _timeStamp = _fileInfo.LastWriteTime;
     }
@@ -71,6 +72,7 @@ public class IOConcrete : MonoBehaviour,IOInterface
 
     /// <summary>
     /// 解析Json，只有时间戳改变时才会解析
+    /// 只要调用这个函数，文件内容就会被读取、清空
     /// </summary>
     /// <param name="index">目标key，通常为命令编号</param>
     /// <returns>返回读取到的命令的JObject，如果未找到制定编号的命令则返回null</returns>
@@ -102,7 +104,7 @@ public class IOConcrete : MonoBehaviour,IOInterface
     
     public void OutputEnvMessage(string message)
     {
-        throw new System.NotImplementedException();
+        File.WriteAllText(EnvMessagePath,message);
     }
 
     public List<JObject> GetAgentControlOrder()
@@ -119,7 +121,7 @@ public class IOConcrete : MonoBehaviour,IOInterface
             {
                 break;
             }
-        }
+        }    
         return list;
     }
 }
