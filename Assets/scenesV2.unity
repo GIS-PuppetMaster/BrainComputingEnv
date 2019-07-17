@@ -258,7 +258,6 @@ GameObject:
   - component: {fileID: 466111485}
   - component: {fileID: 466111484}
   - component: {fileID: 466111483}
-  - component: {fileID: 466111482}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -266,18 +265,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &466111482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 466111481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98b142dcc29fdcb429cfa54f35cf3b13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &466111483
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -658,12 +645,64 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: b20977e41c1d1a740b42145ad04adf60, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b235179bd2a63d1468dd430670338c55, type: 3}
+--- !u!1 &653880353 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100168, guid: b235179bd2a63d1468dd430670338c55,
+    type: 3}
+  m_PrefabInstance: {fileID: 1377848480}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &653880354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653880353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89afa56effe3c44fb8225b57777429b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: "\u9648\u6CCA\u821F"
+--- !u!114 &653880357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653880353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419d889d18ecb9e41b23d386309f48b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentControlPath: "C:\\Users\\zkx74\\Desktop\\totalTest\\database\\\u9648\u6CCA\u821F\\interaction\\withUnity\\control.json"
+  envMessagePath: "C:\\Users\\zkx74\\Desktop\\totalTest\\envMessage\\\u9648\u6CCA\u821F\\cbzEnvMessage.txt"
 --- !u!4 &680811639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400168, guid: b235179bd2a63d1468dd430670338c55,
     type: 3}
   m_PrefabInstance: {fileID: 1607809804}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &817241237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100170, guid: b235179bd2a63d1468dd430670338c55,
+    type: 3}
+  m_PrefabInstance: {fileID: 1377848480}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &817241239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817241237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89afa56effe3c44fb8225b57777429b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: Adam
 --- !u!4 &869845256 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400168, guid: b235179bd2a63d1468dd430670338c55,
@@ -682,7 +721,6 @@ GameObject:
   - component: {fileID: 954320178}
   - component: {fileID: 954320177}
   - component: {fileID: 954320176}
-  - component: {fileID: 954320180}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -762,18 +800,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &954320180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954320175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98b142dcc29fdcb429cfa54f35cf3b13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1111643033 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100186, guid: 6033faca8dfb6aa4f9caf9d61b2585b4,
@@ -1054,7 +1080,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100168, guid: b235179bd2a63d1468dd430670338c55, type: 3}
       propertyPath: m_Name
-      value: Ethan (3)
+      value: "\u9648\u6CCA\u821F"
       objectReference: {fileID: 0}
     - target: {fileID: 400168, guid: b235179bd2a63d1468dd430670338c55, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1372,7 +1398,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: Adam
-  agentControlPath: "C://Users//zkx74//Desktop//totalTest//database//\u9648\u6CCA\u821F//interaction//withUnity//control.json"
 --- !u!1 &1678244622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,7 +1605,6 @@ GameObject:
   - component: {fileID: 2084404740}
   - component: {fileID: 2084404739}
   - component: {fileID: 2084404738}
-  - component: {fileID: 2084404737}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -1588,18 +1612,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2084404737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084404736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98b142dcc29fdcb429cfa54f35cf3b13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &2084404738
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class EnvEventManager
 
     public JObject GetMessageAsSender(GameObject agent)
     {
-        return _messageManager.GerMessageAsSender(agent);
+        return _messageManager.GetMessageAsSender(agent);
     }
 
     public JObject GetMessageAsReceiver(GameObject agent)
@@ -66,7 +66,7 @@ public class EnvEventManager
     /// <returns>能观察到的物体的EnvMessage(Json格式string)</returns>
     public string GetVisiableObjectAsMessage(GameObject agent)
     {
-        List<GameObject> visibleGameObjects=new List<GameObject>();
+        List<GameObject> visibleGameObjects=GetVisiableObject(agent);
         List<VisualMessage> visualMessages=new List<VisualMessage>();
         foreach(GameObject gameObject in visibleGameObjects)
         {
@@ -91,5 +91,37 @@ class VisualMessage
     {
         this.pos = pos;
         this.objectName = objectName;
+    }
+}
+
+/// <summary>
+/// 听觉信息
+/// </summary>
+class HearingMessage
+{
+    //声音的大致方向
+    private readonly AngelPire direction;
+    //声音内容
+    private readonly string content;
+
+    public HearingMessage(AngelPire direction, string content)
+    {
+        this.direction = direction;
+        this.content = content;
+    }
+}
+
+/// <summary>
+/// 声源方向角度对，在真实值两侧取随机误差
+/// </summary>
+class AngelPire
+{
+    private readonly float angel1;
+    private readonly float angel2;
+
+    public AngelPire(float angel1, float angel2)
+    {
+        this.angel1 = angel1;
+        this.angel2 = angel2;
     }
 }

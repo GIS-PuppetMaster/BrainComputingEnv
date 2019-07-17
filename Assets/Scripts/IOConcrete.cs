@@ -19,11 +19,11 @@ public class IOConcrete : MonoBehaviour,IOInterface
     /// <summary>
     /// 控制命令读入路径
     /// </summary>
-    public static string AgentControlPath = "";
+    public string agentControlPath ;
     /// <summary>
     /// 环境信息输出路径
     /// </summary>
-    public static string EnvMessagePath = "";
+    public string envMessagePath ;
 
 
     //上一次读取命令时文件的时间戳
@@ -40,14 +40,10 @@ public class IOConcrete : MonoBehaviour,IOInterface
 
 
     /// <summary>
-    /// 构造函数
-    /// 初始化文件读取路径
     /// 初始化json读取
     /// </summary>
-    /// <param name="path">命令文件读取路径</param>
-    public IOConcrete(string path)
+    void Start()
     {
-        AgentControlPath = path;
         JsonReaderInit();
     }
 
@@ -58,13 +54,14 @@ public class IOConcrete : MonoBehaviour,IOInterface
     /// </summary>
     private void JsonReaderInit()
     {
-        _file = File.OpenText(AgentControlPath);
-        _fileInfo = new FileInfo(AgentControlPath);
+        _file = File.OpenText(agentControlPath);
+        _fileInfo = new FileInfo(agentControlPath);
         _reader = new JsonTextReader(_file);
+        _reader.SupportMultipleContent = true;
         _jObject = (JObject)JToken.ReadFrom(_reader);
         _file.Close();
         //清空文件
-        File.WriteAllText(AgentControlPath,"");
+        File.WriteAllText(agentControlPath,"");
         //记录清空文件后的时间戳
         _timeStamp = _fileInfo.LastWriteTime;
     }
@@ -78,14 +75,13 @@ public class IOConcrete : MonoBehaviour,IOInterface
     /// <returns>返回读取到的命令的JObject，如果未找到制定编号的命令则返回null</returns>
     private JObject ParseJsonReturnJObject(long index)
     {
-        JsonReaderInit();
-        _fileInfo = new FileInfo(AgentControlPath);
+        _fileInfo = new FileInfo(agentControlPath);
         if (_fileInfo.LastWriteTime.Equals(_timeStamp))
         {
             _timeStamp = _fileInfo.LastWriteTime;
-            if (_jObject[index] != null)
+            if (_jObject[index.ToString()] != null)
             {
-                var value = _jObject[index];
+                var value = _jObject[index.ToString()];
                 return (JObject)value;
             }
             return null;
@@ -97,6 +93,7 @@ public class IOConcrete : MonoBehaviour,IOInterface
     
     public JObject GetAgentControlOrderFromIndex(long index)
     {
+        JsonReaderInit();
         _jObject = ParseJsonReturnJObject(index);
         return _jObject;
     }
@@ -104,13 +101,14 @@ public class IOConcrete : MonoBehaviour,IOInterface
     
     public void OutputEnvMessage(string message)
     {
-        File.WriteAllText(EnvMessagePath,message);
+        File.WriteAllText(envMessagePath,message);
     }
 
     public List<JObject> GetAgentControlOrder()
     {
+        JsonReaderInit();
         List<JObject> list = new List<JObject>();
-        for(int i=0; ; i++)
+        for(int i=1; ; i++)
         {
             JObject jObject = ParseJsonReturnJObject(i);
             if (jObject != null)

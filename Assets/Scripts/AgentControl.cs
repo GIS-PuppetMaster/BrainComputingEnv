@@ -13,9 +13,6 @@ public class AgentControl : MonoBehaviour
     private string id="Adam";
     //待执行命令列表
     private readonly Queue<JObject> _nextOrder = new Queue<JObject>();
-    //控制文件路径
-    [SerializeField]
-    private string agentControlPath = "C://Users//zkx74//Desktop//totalTest//database//陈泊舟//interaction//withUnity//control.json";
 
     //Agent状态
     private string _state;
@@ -56,9 +53,8 @@ public class AgentControl : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _ioConcrete = gameObject.AddComponent<IOConcrete>();
+        _ioConcrete=gameObject.GetComponent<IOConcrete>();
         _ioConcrete.GetAgentControlOrder();
-       
     }
 
     // Update is called once per frame

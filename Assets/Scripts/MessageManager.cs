@@ -13,7 +13,7 @@ public class MessageManager
     /// </summary>
     /// <param name="agent">发出消息的agent</param>
     /// <returns>消息</returns>
-    public JObject GerMessageAsSender(GameObject agent)
+    public JObject GetMessageAsSender(GameObject agent)
     {
         //TODO
         throw new NotImplementedException();

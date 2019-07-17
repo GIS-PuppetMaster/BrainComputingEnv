@@ -24,7 +24,8 @@ public interface IOInterface
     /// </summary>
     /// <param name="message">要输出的环境交互信息</param>
     void OutputEnvMessage(string message);
-
+    
+    
         
      
 }

@@ -8,6 +8,7 @@
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="innerSPEC.txt" t="Include" />
         <e p="Scripts" t="Include">
           <e p="AgentControl.cs" t="Include" />
           <e p="Ball.cs" t="Include" />

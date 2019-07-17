@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\MessageManager.cs" />
     <Compile Include="Assets\Scripts\stickman.cs" />
     <Compile Include="Assets\Scripts\TextControl.cs" />
+    <None Include="Assets\innerSPEC.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/zkx74/Documents/New Unity Project/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
