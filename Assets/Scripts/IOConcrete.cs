@@ -37,15 +37,7 @@ public class IOConcrete : MonoBehaviour,IOInterface
     private FileInfo _fileInfo;
     //读取到的命令
     private JObject _jObject;
-
-
-    /// <summary>
-    /// 初始化json读取
-    /// </summary>
-    void Start()
-    {
-        JsonReaderInit();
-    }
+    
 
 
     /// <summary>
@@ -75,17 +67,11 @@ public class IOConcrete : MonoBehaviour,IOInterface
     /// <returns>返回读取到的命令的JObject，如果未找到制定编号的命令则返回null</returns>
     private JObject ParseJsonReturnJObject(long index)
     {
-        _fileInfo = new FileInfo(agentControlPath);
-        if (_fileInfo.LastWriteTime.Equals(_timeStamp))
-        {
-            _timeStamp = _fileInfo.LastWriteTime;
-            if (_jObject[index.ToString()] != null)
+        if (_jObject[index.ToString()] != null)
             {
                 var value = _jObject[index.ToString()];
                 return (JObject)value;
             }
-            return null;
-        }
         return null;
     }
 
@@ -93,9 +79,15 @@ public class IOConcrete : MonoBehaviour,IOInterface
     
     public JObject GetAgentControlOrderFromIndex(long index)
     {
-        JsonReaderInit();
-        _jObject = ParseJsonReturnJObject(index);
-        return _jObject;
+        _fileInfo = new FileInfo(agentControlPath);
+        if (!_fileInfo.LastWriteTime.Equals(_timeStamp))
+        {
+            JsonReaderInit();
+            _jObject = ParseJsonReturnJObject(index);
+            return _jObject;
+        }
+
+        return null;
     }
 
     
@@ -106,20 +98,25 @@ public class IOConcrete : MonoBehaviour,IOInterface
 
     public List<JObject> GetAgentControlOrder()
     {
-        JsonReaderInit();
-        List<JObject> list = new List<JObject>();
-        for(int i=1; ; i++)
+        _fileInfo = new FileInfo(agentControlPath);
+        if (!_fileInfo.LastWriteTime.Equals(_timeStamp))
         {
-            JObject jObject = ParseJsonReturnJObject(i);
-            if (jObject != null)
+            JsonReaderInit();
+            List<JObject> list = new List<JObject>();
+            for (int i = 1;; i++)
             {
-                list.Add(jObject);
+                JObject jObject = ParseJsonReturnJObject(i);
+                if (jObject != null)
+                {
+                    list.Add(jObject);
+                }
+                else
+                {
+                    break;
+                }
             }
-            else
-            {
-                break;
-            }
-        }    
-        return list;
+            return list;
+        }
+        return null;
     }
 }

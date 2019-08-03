@@ -54,12 +54,13 @@ public class AgentControl : MonoBehaviour
     void Start()
     {
         _ioConcrete=gameObject.GetComponent<IOConcrete>();
-        _ioConcrete.GetAgentControlOrder();
+       // _ioConcrete.GetAgentControlOrder();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //_ioConcrete=gameObject.GetComponent<IOConcrete>();
         //获取本帧更新的所有命令
         List<JObject> orderList = _ioConcrete.GetAgentControlOrder();
         //与当前待执行的命令合并
