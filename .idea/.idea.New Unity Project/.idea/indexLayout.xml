@@ -21,6 +21,7 @@
       <Path>Logs</Path>
       <Path>Temp</Path>
       <Path>obj</Path>
+      <Path>sourceAgent</Path>
     </explicitExcludes>
   </component>
 </project>

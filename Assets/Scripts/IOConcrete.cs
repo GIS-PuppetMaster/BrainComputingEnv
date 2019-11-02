@@ -37,7 +37,20 @@ public class IOConcrete : MonoBehaviour,IOInterface
     private FileInfo _fileInfo;
     //读取到的命令
     private JObject _jObject;
-    
+
+    void Awake()
+    {
+        //如果文件不存在则创建
+        if (!File.Exists(agentControlPath))
+        {
+            File.Create(agentControlPath).Dispose();
+        }
+        if (!File.Exists(envMessagePath))
+        {
+            File.Create(envMessagePath).Dispose();
+            
+        }
+    }
 
 
     /// <summary>
@@ -93,13 +106,24 @@ public class IOConcrete : MonoBehaviour,IOInterface
     
     public void OutputEnvMessage(string message)
     {
-        File.WriteAllText(envMessagePath,message);
+        var f = File.OpenText(envMessagePath);
+        string text = f.ReadToEnd();
+        //如果环境文件为空
+        f.Dispose();
+        if(text=="")
+        {
+            //输出环境信息
+            File.WriteAllText(envMessagePath, message);
+        }
     }
 
     public List<JObject> GetAgentControlOrder()
     {
         _fileInfo = new FileInfo(agentControlPath);
-        if (!_fileInfo.LastWriteTime.Equals(_timeStamp))
+        var f = File.OpenText(agentControlPath);
+        string text=f.ReadToEnd();
+        f.Dispose();
+        if (!_fileInfo.LastWriteTime.Equals(_timeStamp) && text!="")
         {
             JsonReaderInit();
             List<JObject> list = new List<JObject>();
@@ -117,6 +141,8 @@ public class IOConcrete : MonoBehaviour,IOInterface
             }
             return list;
         }
-        return null;
+
+        List<JObject> emptyList = new List<JObject>();
+        return emptyList;
     }
 }

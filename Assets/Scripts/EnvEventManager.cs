@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -11,21 +12,18 @@ using UnityEngine.Animations;
 ///     Agent对环境信息的感官获取
 ///     Agent对环境的改变的实现
 /// </summary>
-public class EnvEventManager
+public static class EnvEventManager
 {
-    /// <summary>
-    /// 环境中存在的消息
-    /// </summary>
-    public MessageManager _messageManager=new MessageManager();
+    
 
-    public JObject GetMessageAsSender(GameObject agent)
+    public static JObject GetMessageAsSender(GameObject agent)
     {
-        return _messageManager.GetMessageAsSender(agent);
+        return MessageManager.GetMessageAsSender(agent);
     }
 
-    public JObject GetMessageAsReceiver(GameObject agent)
+    public static JObject GetMessageAsReceiver(GameObject agent)
     {
-        return _messageManager.GetMessageAsReceiver(agent);
+        return MessageManager.GetMessageAsReceiver(agent);
     }
 
     /// <summary>
@@ -34,7 +32,7 @@ public class EnvEventManager
     /// </summary>
     /// <param name="agent">观察世界的Agent</param>
     /// <returns>能观察到的物体的列表</returns>
-    private List<GameObject> GetVisiableObject(GameObject agent)
+    private static List<GameObject> GetVisiableObject(GameObject agent)
     {
         //获取当前场景中的所有Tag为"Visible"GameObject
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Visible");
@@ -50,7 +48,7 @@ public class EnvEventManager
             //TODO:这里射线最大长度要超过地图对角线长度，有待敲定
             Physics.Raycast(ray, out hit, 100000);
             //如果没有碰撞
-            if (hit.transform == null)
+            if (hit.transform == target.transform)
             {
                 //加入可视物品列表
                 visibleGameObjects.Add(target);
@@ -64,34 +62,40 @@ public class EnvEventManager
     /// </summary>
     /// <param name="agent">观察世界的Agent</param>
     /// <returns>能观察到的物体的EnvMessage(Json格式string)</returns>
-    public string GetVisiableObjectAsMessage(GameObject agent)
+    public static string GetVisiableObjectAsMessage(GameObject agent)
     {
         List<GameObject> visibleGameObjects=GetVisiableObject(agent);
-        List<VisualMessage> visualMessages=new List<VisualMessage>();
+        Dictionary<int,VisualMessage> visualMessages=new Dictionary<int, VisualMessage>();
+        int c = 1;
         foreach(GameObject gameObject in visibleGameObjects)
         {
             var position = gameObject.transform.position;
-            visualMessages.Add(new VisualMessage(""+position.x+position.y+position.z,gameObject.name));
+            visualMessages.Add(c,new VisualMessage(""+position.x+","+position.y+","+position.z,gameObject.name));
+            c += 1;
         }
-        return JsonConvert.SerializeObject(visualMessages);
+        Dictionary<string,Dictionary<int,VisualMessage>> res=new Dictionary<string, Dictionary<int, VisualMessage>>();
+        res.Add("vision",visualMessages);
+        return JsonConvert.SerializeObject(res);
     }
 
 
 }
+
 /// <summary>
 /// immutable
 /// 保存视觉信息，便于序列化
 /// </summary>
-class VisualMessage
+public class VisualMessage
 {
-    private readonly string pos;
-    private readonly string objectName;
+    public string pos;
+    public string objectName;
 
     public VisualMessage(string pos, string objectName)
     {
         this.pos = pos;
         this.objectName = objectName;
     }
+    
 }
 
 /// <summary>
